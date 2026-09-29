@@ -1,62 +1,64 @@
 # aiyifan-webos
 
-一个面向 LG webOS TV 的非官方爱壹帆电视界面。当前自制 UI 版本为 **0.1.22**，已在 LG G4 上安装测试。项目用于个人学习与设备测试；影片、账号、会员权限和播放地址由爱壹帆官方服务提供。
+**English** | [简体中文](README.zh-CN.md)
 
-## 已实现功能
+An unofficial TV interface for iyf.tv on LG webOS. The current custom UI is **v0.1.22** and has been installed and tested on an LG G4. This is a personal learning and device-testing project. Videos, accounts, membership entitlements, and stream URLs come from iyf.tv's services.
 
-| 区域 | 功能 |
+## Features
+
+| Area | Current support |
 | --- | --- |
-| 首页与分类 | 推荐、电影、电视剧、综艺、动漫、纪录片、短剧、体育；分类标签和影片列表从官网动态读取，支持分页。 |
-| 查找与详情 | 搜索影片、查看简介、语言和剧集；详情页读取官网评论并翻页浏览。评论目前只读。 |
-| 观看历史 | 首页显示近期会员云端与本机记录；左侧独立“观看历史”分类以五列海报网格分页展示；可选择剧集并从保存位置续播。 |
-| 登录 | 应用内扫码登录，另有官方账号登录入口；登录票据保存在电视本机，用于查询会员状态和申请播放。应用不保存密码。 |
-| 自制播放器 | 根据官方返回的片源播放 HLS；提供实际可用的画质选项、加载状态、暂停、进度显示、短按或长按方向键定位，以及播放失败时切换官网播放器。 |
-| 弹幕 | 读取影片弹幕，支持开关与 18、22、26、30 像素字号；设置保存在本机。 |
-| 遥控器 | 方向键移动焦点，确认键操作，返回键回到上一层；可进入评论区逐条阅读。 |
+| Home and browsing | Recommendations, movies, TV series, variety shows, anime, documentaries, short dramas, and sports. Category filters and titles load dynamically from the site, with pagination. |
+| Search and details | Search, synopsis, language and episode selection, and paginated site comments. Comments are read-only. |
+| Watch history | Recent account and local history on the home screen; a separate sidebar category with a five-column, paginated poster grid; resume a selected episode from its saved position. |
+| Sign-in | In-app QR sign-in and an official account sign-in option. Session tickets are stored on the TV for account and playback requests. The app does not save passwords. |
+| Custom player | HLS playback using streams returned by the site, available quality choices, loading feedback, pause and progress controls, short-press and long-press seeking, and a fallback to the original site player. |
+| Danmu | Display timed on-screen comments, turn them on or off, and choose 18, 22, 26, or 30 px text. Preferences are saved locally. |
+| Remote control | Direction keys move focus, OK activates a control, and Back returns to the previous view. Comments can be focused and read one by one. |
 
-电视上的倍速目前只提供 **1×**：LG G4 实测设置更高倍速后画面仍按约 1× 前进。电脑浏览器环境提供倍速选项，但不能替代电视实测。自制播放进度目前只保存在本机，尚未写回官网云端历史；评论不支持发表或回复。不同片源可用的画质、广告和播放权限取决于官网返回的结果。另附 `shell-app/` 纯网页套壳备选版本，安装时会替换同一应用 ID 的自制 UI。
+On the LG G4, playback speed is currently limited to **1×**: higher rates could be selected in testing but the picture continued at approximately 1×. The desktop browser version offers speed choices, but that does not establish TV support. Progress from the custom player is saved locally and is not yet written back to the site's cloud history. Posting or replying to comments is not implemented. Available quality levels, ads, and playback rights depend on the site's response for each title. `shell-app/` contains a simpler site-wrapper alternative; installing it replaces the custom UI because both use the same app ID.
 
-## 前置条件
+## Prerequisites
 
-1. 一台支持 Developer Mode 的 LG webOS 电视，以及同一局域网内的电脑。当前主要在 **LG G4** 上验证；其他机型需要自行实测。
-2. 电视安装 LG **Developer Mode** 应用，使用 LG Developer 账号登录，开启 **Dev Mode Status**，按提示重启电视，然后在应用内开启 **Key Server**。首次配对需要电视上显示的一次性口令。Developer Mode 会话到期后需要在电视上续期或重新开启。步骤见 [LG 官方 Developer Mode 指南](https://webostv.developer.lge.com/develop/getting-started/developer-mode-app)。
-3. 电脑安装 Node.js 24 或更新版本（含 npm）。项目把 [webOS CLI](https://webostv.developer.lge.com/develop/tools/cli-dev-guide) 列为开发依赖，运行 `npm ci` 后无需另装全局 CLI。
+1. An LG webOS TV that supports Developer Mode and a computer on the same local network. Development has mainly been verified on an **LG G4**; other models need their own testing.
+2. Install LG's **Developer Mode** app on the TV and sign in with an LG Developer account. Turn on **Dev Mode Status**, restart when prompted, and enable **Key Server** in the app. Initial pairing uses the one-time passphrase shown on the TV. Renew or restart Developer Mode when its session expires. See [LG's Developer Mode guide](https://webostv.developer.lge.com/develop/getting-started/developer-mode-app).
+3. Install Node.js 24 or newer, including npm. The project includes [webOS CLI](https://webostv.developer.lge.com/develop/tools/cli-dev-guide) as a development dependency, so `npm ci` supplies the CLI without a global install.
 
-## 克隆后运行测试
+## Run tests and preview on a computer
 
-在 PowerShell 中进入仓库根目录：
+From the repository root in PowerShell:
 
 ```powershell
 npm ci
 npm test
 ```
 
-电脑上可用以下命令预览网页界面：
+To preview the web interface in a desktop browser:
 
 ```powershell
 npx ares-server .\app --open
 ```
 
-电脑预览适合检查界面与普通导航；扫码登录的 webOS 服务桥接、电视遥控器和媒体播放仍需在电视上测试。
+Desktop preview is useful for layout and basic navigation checks. The webOS QR service bridge, TV remote behavior, and media playback still require TV testing.
 
-## 打包与安装到电视
+## Package and sideload to the TV
 
-先在 Developer Mode 应用中确认 **Dev Mode Status** 和 **Key Server** 已开启，并记下电视的局域网 IP。首次连接时，在仓库根目录运行（把 `TV_IP` 换成电视 IP）：
+On the TV, confirm that **Dev Mode Status** and **Key Server** are enabled, and note its local IP address. For the first connection, run these commands from the repository root, replacing `TV_IP` with the TV's address:
 
 ```powershell
 npx ares-setup-device --add tv -i "host=TV_IP" -i "port=9922" -i "username=prisoner"
 npx ares-novacom --device tv --getkey
 ```
 
-`ares-novacom` 提示时，在电脑终端输入电视 Developer Mode 页面显示的口令。电视设备名 `tv` 只需配置一次；以后重启电视或 Key Server 后若连接失效，重新执行取密钥命令即可。LG 官方也提供[设备配对步骤](https://webostv.developer.lge.com/develop/getting-started/developer-mode-app)。
+When `ares-novacom` prompts for a passphrase, enter the one shown in the TV's Developer Mode app. The `tv` device profile only needs to be set up once. If its connection stops working after a TV restart or a Key Server change, retrieve the key again. LG also documents the [device pairing procedure](https://webostv.developer.lge.com/develop/getting-started/developer-mode-app).
 
-打包、安装并启动当前自制 UI：
+Package, install, and launch the current custom UI:
 
 ```powershell
 .\tools\install.ps1 -Device tv
 ```
 
-脚本会先运行 `npm run package`，生成 `dist/com.personal.iyftv_0.1.22_all.ipk`，再调用 `ares-install` 和 `ares-launch`。如需分开执行：
+The script runs `npm run package`, creates `dist/com.personal.iyftv_0.1.22_all.ipk`, then runs `ares-install` and `ares-launch`. To perform those steps separately:
 
 ```powershell
 npm run package
@@ -64,18 +66,18 @@ npx ares-install --device tv .\dist\com.personal.iyftv_0.1.22_all.ipk
 npx ares-launch --device tv com.personal.iyftv
 ```
 
-`dist/` 中的 IPK 是本机生成的安装包，不纳入 Git。需要调试电视中的应用时可用：
+The generated IPK in `dist/` is not committed to Git. To inspect the running TV app:
 
 ```powershell
 npx ares-inspect --device tv --app com.personal.iyftv
 ```
 
-## 目录
+## Repository layout
 
-- `app/`：自制电视 UI、播放器和浏览逻辑。
-- `auth-service/`：电视端扫码登录服务桥接。
-- `tools/`：安装脚本与自动测试。
-- `shell-app/`：直接打开原站的备选套壳应用。
-- `fallback/`：早期网页回退原型。
+- `app/`: Custom TV interface, browsing, and playback logic.
+- `auth-service/`: TV-side bridge for QR sign-in.
+- `tools/`: Installation script and automated tests.
+- `shell-app/`: Alternative app that opens the original site.
+- `fallback/`: Earlier web fallback prototype.
 
-这是非官方项目，不隶属于爱壹帆或 LG。仓库不包含登录密码、电视配对密钥或本机会话数据。
+This project is not affiliated with iyf.tv or LG. It contains no account passwords, TV pairing keys, or locally stored session data.
