@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>帆 · 电视</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="sail" aria-hidden="true"></span><strong>帆<span>电视</span></strong></div>
+    <nav aria-label="影片分类" id="navigation"></nav>
+    <div class="sidebar-bottom">
+      <button id="member-login" class="nav-button"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 20c.7-3.6 3.7-6 8-6s7.3 2.4 8 6"></path></svg></span><span id="member-label">登录 / 会员</span></button>
+      <button id="original-home" class="nav-button">↗<span>打开原站</span></button>
+      <button id="help-button" class="nav-button">?<span>使用说明</span></button>
+      <p>个人练习版 · 非官方<br>v0.1.22</p>
+    </div>
+  </aside>
+  <main id="main">
+    <header><span id="breadcrumb">发现 / 为大屏而做</span><div class="header-right"><span id="connection">正在连接</span><time id="clock"></time></div></header>
+    <section id="catalog-view">
+      <section id="watch-history" aria-labelledby="watch-history-title"><div class="section-heading"><h2 id="watch-history-title">观看历史</h2><span id="watch-history-source">本机记录 · 选择影片继续观看</span></div><p id="history-empty" class="meta">看过的影片和播放进度会保存在这里。</p><div id="history-cards" aria-label="最近观看的影片"></div></section>
+      <section class="hero" aria-labelledby="hero-title">
+        <div id="hero-art" class="hero-art"></div><div class="hero-shade"></div>
+        <div class="hero-copy"><span class="eyebrow">YOUR EVENING, YOUR SCREEN</span><h1 id="hero-title">把好故事，留给大屏。</h1><p id="hero-meta">正在载入爱壹帆影片目录</p><p id="hero-summary">方向键选片，确认键进入。轻松找到今晚想看的故事。</p><button id="hero-open" class="primary" disabled>查看影片 <span>→</span></button></div>
+        <span class="hero-note">电视界面 · 遥控器优先</span>
+      </section>
+      <form id="search-form" hidden><label for="search-input">搜索影片</label><div class="search-line"><input id="search-input" type="search" placeholder="输入片名，按确认搜索" autocomplete="off"><button type="submit" class="primary">搜索</button></div></form>
+      <div class="section-heading"><h2 id="section-title">今晚看什么</h2><span id="result-count"></span><button id="continue-watching" class="secondary" hidden>继续观看</button></div>
+      <div id="filters" class="filter-chips" aria-label="分类筛选" hidden></div>
+      <p id="catalog-status" class="status" role="status">正在载入…</p>
+      <div id="catalog-error" class="error-box" hidden><p></p><button id="retry" class="secondary">重新加载</button></div>
+      <div id="cards" class="cards" aria-label="影片列表"></div>
+      <div id="pagination" class="pagination" hidden><button id="previous-page" class="secondary" hidden>上一页</button><span id="page-label"></span><button id="next-page" class="secondary" hidden>下一页</button></div>
+    </section>
+    <section id="detail-view" hidden></section>
+  </main>
+  <footer id="key-guide"><span><kbd>↑ ↓ ← →</kbd> 移动</span><span><kbd>OK</kbd> 选择</span><span><kbd>返回</kbd> 上一级</span><span class="footer-note">会员播放功能测试中 · 失败可切换官网播放器</span></footer>
+  <section id="player-view" hidden aria-label="视频播放器">
+    <video id="video" playsinline preload="auto"></video>
+    <div id="danmu-layer" aria-hidden="true"></div>
+    <div id="player-status" role="status" aria-live="polite" hidden><span id="player-spinner" aria-hidden="true" hidden></span><div id="player-message"></div></div>
+    <div id="player-overlay">
+      <div class="player-top"><button id="player-back" class="secondary">← 返回选集</button><h2 id="player-title"></h2><button id="player-quality" class="secondary" aria-label="切换视频画质">画质 720P</button><button id="player-speed" class="secondary" aria-label="切换播放速度">速度 1×</button><button id="player-danmu-toggle" class="secondary" aria-label="开启或关闭弹幕">弹幕 开</button><button id="player-danmu-size" class="secondary" aria-label="选择弹幕字体大小">字号 22</button></div>
+      <div id="player-menu" role="dialog" aria-modal="true" aria-labelledby="player-menu-title" hidden><h3 id="player-menu-title"></h3><div id="player-menu-options" role="menu"></div><p id="player-menu-note"></p></div>
+      <button id="player-fallback" class="primary" hidden>改用爱壹帆官方播放器</button>
+      <div class="player-bottom"><div id="seek-preview" hidden><strong id="seek-target"></strong><span>松开定位 · 返回取消</span></div><div id="player-timeline" class="timeline" role="slider" tabindex="0" aria-label="播放进度，左右键调整，长按加速" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"><div id="progress"></div><span id="seek-marker" hidden></span></div><div class="player-controls"><button id="seek-back" class="secondary">−10 秒</button><button id="play-toggle" class="primary">暂停</button><button id="seek-forward" class="secondary">+10 秒</button><span id="play-time">00:00 / 00:00</span><button id="player-original" class="secondary">在原站播放 ↗</button></div><p>左右：调整进度，长按加速　·　上下：选择控制项　·　确认：暂停 / 播放　·　片前内容不可快进</p></div>
+    </div>
+  </section>
+  <section id="login-view" hidden aria-label="爱壹帆会员登录">
+    <div class="login-panel">
+      <div class="login-heading"><div><h2>爱壹帆会员登录</h2><p id="login-status">登录由爱壹帆官方认证组件处理；本应用不会保存密码。</p></div><button id="login-close" class="secondary">返回应用</button></div>
+      <div class="login-methods" role="tablist" aria-label="登录方式">
+        <button id="login-qr-tab" class="secondary selected" role="tab" aria-selected="true" aria-controls="qr-login">扫码登录</button>
+        <button id="login-account-tab" class="secondary" role="tab" aria-selected="false" aria-controls="account-login">账号登录</button>
+      </div>
+      <section id="qr-login" class="qr-login" role="tabpanel" aria-labelledby="login-qr-tab">
+        <div class="qr-wrap"><div class="qr-paper"><img id="login-qr" alt="爱壹帆扫码登录二维码" hidden><span id="qr-placeholder">正在向爱壹帆申请安全二维码…</span></div></div>
+        <div class="qr-copy"><h3>使用爱壹帆 App 扫码登录</h3><p>在手机 App「首页」右上角选择「＋」→「扫一扫」。也可尝试手机浏览器或微信扫码。</p><p id="qr-status" role="status" aria-live="polite">正在获取二维码…</p><button id="qr-refresh" class="secondary">刷新二维码</button></div>
+      </section>
+      <section id="account-login" role="tabpanel" aria-labelledby="login-account-tab" hidden>
+        <div id="login-frame"></div>
+      </section>
+      <div class="login-footer"><span>登录成功后，本应用仅在本机保存官网返回的会话票据，用于查询账号和播放权限。</span><button id="login-original" class="secondary">打开官网登录</button></div>
+    </div>
+  </section>
+  <div id="modal-layer" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><h2 id="modal-title"></h2><p id="modal-text"></p><div id="modal-actions"></div></section></div>
+  <div id="toast" role="status" hidden></div>
+  <script src="vendor/md5.min.js"></script>
+  <script src="vendor/webOSTV.js"></script>
+  <script src="vendor/qrcode.js"></script>
+  <script src="vendor/hls.min.js"></script>
+  <script src="https://www.iyf.tv/assets/lib/DNA-3.0.0.9.js?v=3"></script>
+  <script src="api.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

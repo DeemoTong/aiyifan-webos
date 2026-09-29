@@ -1,0 +1,7 @@
+{
+  "name": "com.personal.iyftv.auth",
+  "version": "1.0.0",
+  "description": "Official QR sign-in bridge for the personal webOS TV app",
+  "main": "auth_service.js",
+  "license": "UNLICENSED"
+}

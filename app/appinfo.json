@@ -1,0 +1,13 @@
+{
+  "id": "com.personal.iyftv",
+  "version": "0.1.22",
+  "vendor": "Personal practice",
+  "type": "web",
+  "main": "index.html",
+  "title": "帆·电视（练习版）",
+  "icon": "icon.png",
+  "largeIcon": "largeIcon.png",
+  "resolution": "1920x1080",
+  "disableBackHistoryAPI": false,
+  "requiredACG": []
+}

@@ -1,0 +1,12 @@
+{
+  "id": "com.personal.iyfweb",
+  "version": "0.1.0",
+  "vendor": "Personal practice",
+  "type": "web",
+  "main": "index.html",
+  "title": "爱壹帆网页入口（练习版）",
+  "icon": "icon.png",
+  "resolution": "1920x1080",
+  "disableBackHistoryAPI": false,
+  "requiredACG": []
+}

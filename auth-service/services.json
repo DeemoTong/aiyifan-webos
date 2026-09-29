@@ -1,0 +1,10 @@
+{
+  "id": "com.personal.iyftv.auth",
+  "description": "Official QR sign-in bridge",
+  "services": [
+    {
+      "name": "com.personal.iyftv.auth",
+      "description": "Official QR sign-in bridge"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+node_modules/
+dist/
+*.ipk
+*.pem
+*.key
+*.p12
+.env
+.env.*
+*.local
+CUSTOM-UI.md
+player-menu-preview.jpg

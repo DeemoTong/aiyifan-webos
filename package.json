@@ -1,0 +1,15 @@
+{
+  "name": "aiyifan-webos",
+  "version": "0.1.22",
+  "private": true,
+  "description": "Personal webOS TV interface for iyf.tv",
+  "scripts": {
+    "test": "node --test tools/test.cjs tools/test-qr-auth-core.cjs tools/test-player-ui.cjs",
+    "package": "ares-package --no-minify -o dist app auth-service",
+    "package:shell": "ares-package --no-minify -o dist shell-app"
+  },
+  "devDependencies": {
+    "@webos-tools/cli": "3.2.6",
+    "jsdom": "29.1.1"
+  }
+}
